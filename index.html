@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday 💛</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=Gloria+Hallelujah&family=Shadows+Into+Light&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Layered background: drifting shapes + photo-hearts + emoji hearts -->
+  <div class="shapes" id="shapes" aria-hidden="true"></div>
+  <div class="photo-hearts" id="photoHearts" aria-hidden="true"></div>
+  <div class="hearts" id="hearts" aria-hidden="true"></div>
+
+  <!-- The scrapbook stage -->
+  <main class="stage" id="stage">
+
+    <!-- COVER -->
+    <section class="page cover active" id="cover">
+      <div class="polaroid big">
+        <img id="coverImg" alt="us" />
+        <span class="tape tape-tl"></span>
+        <span class="tape tape-br"></span>
+      </div>
+      <h1 class="cover-title" id="coverTitle"></h1>
+      <p class="cover-sub" id="coverSub"></p>
+      <button class="btn" id="startBtn">Open the scrapbook ✨</button>
+    </section>
+
+    <!-- DYNAMIC PAGES get injected here -->
+    <div id="pages"></div>
+
+    <!-- COME BACK TOMORROW (shown when today's questions are done but it isn't her birthday yet) -->
+    <section class="page comeback" id="comeback">
+      <span class="washi" id="comebackTape"></span>
+      <h1 class="finale-title" id="comebackTitle"></h1>
+      <p class="finale-msg" id="comebackMsg"></p>
+      <p class="signoff" id="comebackCount"></p>
+      <button class="btn" id="comebackReplay">Start over 🔁</button>
+    </section>
+
+    <!-- FINALE -->
+    <section class="page finale" id="finale">
+      <span class="washi" id="finaleTape"></span>
+      <div class="polaroid big">
+        <img id="finaleImg" alt="happy birthday" />
+        <span class="tape tape-tl"></span>
+      </div>
+      <h1 class="finale-title" id="finaleTitle"></h1>
+      <p class="finale-msg" id="finaleMsg"></p>
+      <p class="signoff" id="finaleSign"></p>
+      <button class="btn" id="replayBtn">Read it again 🔁</button>
+    </section>
+
+  </main>
+
+  <!-- progress dots (hidden) -->
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <!-- background music -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+    <source src="music.ogg" type="audio/ogg" />
+  </audio>
+  <button id="musicToggle" class="music-toggle" aria-label="play music" title="music">🎵</button>
+
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

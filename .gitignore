@@ -1,0 +1,12 @@
+node_modules/
+_test.js
+package.json
+package-lock.json
+.DS_Store
+_synctest.txt
+images/preview_*.jpg
+images/imagesmemory1.jpg
+images/imagesslide*.jpg
+images/imagesadv*.jpg
+images/imagesbonus.jpg
+images/imagesreaction.jpg
