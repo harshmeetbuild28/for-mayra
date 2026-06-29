@@ -190,8 +190,8 @@ const CONTENT = {
   // The LOCKED page she sees until her birthday — the final surprise only opens on the 4th.
   comeback: {
     tape: "Almost there ⏳",
-    title: "This will only open on your birthday",
-    message: "Be patient, my love ⏳ — your final surprise stays locked until your birthday, the 4th of July. Come back then for it 🎂"
+    title: "Want to open it early? 😏",
+    message: "Go on then... try to open your surprise. Catch the button if you can 👇"
   },
 
   // ---- The finale ----------------------------------------------------

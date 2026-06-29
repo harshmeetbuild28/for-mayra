@@ -34,12 +34,22 @@
     <!-- DYNAMIC PAGES get injected here -->
     <div id="pages"></div>
 
-    <!-- COME BACK TOMORROW (shown when today's questions are done but it isn't her birthday yet) -->
+    <!-- LOCKED until her birthday: a dodgy "open it" button + a countdown -->
     <section class="page comeback" id="comeback">
       <span class="washi" id="comebackTape"></span>
       <h1 class="finale-title" id="comebackTitle"></h1>
       <p class="finale-msg" id="comebackMsg"></p>
-      <p class="signoff" id="comebackCount"></p>
+
+      <div class="cb-arena" id="cbArena">
+        <button class="cb-dodge" id="cbDodge">If you want to open this, click here 👀</button>
+      </div>
+
+      <div class="cb-reveal" id="cbReveal" hidden>
+        <p class="cb-patient">Be patient, my love 💛</p>
+        <p class="cb-sub">Your surprise unlocks in:</p>
+        <div class="countdown" id="countdown" aria-label="time until your birthday"></div>
+      </div>
+
       <button class="btn" id="comebackReplay">Start over 🔁</button>
     </section>
 

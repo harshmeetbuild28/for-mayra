@@ -47,13 +47,81 @@ document.addEventListener("DOMContentLoaded", () => {
     const dt = new Date(dateStr + "T00:00:00");
     return TODAY.getTime() >= dt.getTime();
   }
-  const finaleReady = unlocked(C.finale.revealDate);
+  // her birthday unlock — pinned to AUCKLAND time (NZST = UTC+12 in July)
+  const finaleRevealAt = C.finale.revealDate
+    ? new Date(C.finale.revealDate + "T00:00:00+12:00").getTime()
+    : 0;
+  let finaleReady = !C.finale.revealDate || Date.now() >= finaleRevealAt;
 
   /* ---- comeback card (shown before her birthday once today's questions are done) ---- */
   const cb = C.comeback || {};
   document.getElementById("comebackTape").textContent  = cb.tape  || "See you tomorrow 💛";
   document.getElementById("comebackTitle").textContent = cb.title || "That's all for today";
   document.getElementById("comebackMsg").textContent   = cb.message || "Come back tomorrow for the next one 💛";
+
+  /* ---- the cheeky "catch me" lock: button dodges 3 times, 4th click reveals a countdown ---- */
+  (function setupLock(){
+    const cbPage = document.getElementById("comeback");
+    const arena  = document.getElementById("cbArena");
+    const dodge  = document.getElementById("cbDodge");
+    const reveal = document.getElementById("cbReveal");
+    const cdEl   = document.getElementById("countdown");
+    if(!cbPage || !arena || !dodge) return;
+
+    let caught = false, clicks = 0;
+    let x = 20, y = 20, vx = 1.4, vy = 1.1;
+    const taunts = ["Nope! 😜", "Catch me! 🙈", "So close! 😏"];
+
+    function jump(){
+      const W = arena.clientWidth || 300, H = arena.clientHeight || 200;
+      const w = dodge.offsetWidth || 200, h = dodge.offsetHeight || 44;
+      x = Math.random() * Math.max(1, W - w);
+      y = Math.random() * Math.max(1, H - h);
+    }
+    function frame(){
+      if(!caught && cbPage.classList.contains("active") && arena.clientWidth){
+        const W = arena.clientWidth, H = arena.clientHeight;
+        const w = dodge.offsetWidth, h = dodge.offsetHeight;
+        x += vx; y += vy;
+        if(x <= 0){ x = 0; vx = Math.abs(vx); }
+        if(x + w >= W){ x = W - w; vx = -Math.abs(vx); }
+        if(y <= 0){ y = 0; vy = Math.abs(vy); }
+        if(y + h >= H){ y = H - h; vy = -Math.abs(vy); }
+        dodge.style.left = x + "px"; dodge.style.top = y + "px";
+      }
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+
+    dodge.addEventListener("click", () => {
+      if(caught) return;
+      clicks++;
+      if(clicks < 4){
+        dodge.textContent = taunts[Math.min(clicks - 1, taunts.length - 1)];
+        vx *= 1.3; vy *= 1.3;     // gets quicker each time
+        jump();
+      } else {
+        caught = true;            // 4th click — she finally catches it
+        dodge.style.display = "none";
+        if(reveal) reveal.hidden = false;
+      }
+    });
+
+    // live countdown to her birthday (Auckland time)
+    function tick(){
+      if(!cdEl) return;
+      const ms = finaleRevealAt - Date.now();
+      if(ms <= 0){ cdEl.innerHTML = "<span><b>🎉</b>it's your day</span>"; return; }
+      const s = Math.floor(ms / 1000);
+      const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600),
+            m = Math.floor((s % 3600) / 60), sec = s % 60;
+      cdEl.innerHTML =
+        `<span><b>${d}</b>days</span><span><b>${h}</b>hrs</span>` +
+        `<span><b>${m}</b>min</span><span><b>${sec}</b>sec</span>`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
 
   /* ---- BUILD PAGES (only the ones unlocked so far) ---- */
   const pagesWrap = document.getElementById("pages");
@@ -437,6 +505,22 @@ document.addEventListener("DOMContentLoaded", () => {
     allDynamic.forEach(pg => { if(pg._reset) pg._reset(); });   // start every quiz over
     show(cover);
     dots.forEach(d=>d.classList.remove("on"));
+  }
+
+  /* ---- auto-unlock the finale the moment her birthday begins (Auckland midnight) ---- */
+  if(!finaleReady && finaleRevealAt){
+    const wait = finaleRevealAt - Date.now();
+    if(wait > 0 && wait < 2147483647){   // setTimeout caps at ~24.8 days
+      setTimeout(() => {
+        finaleReady = true;
+        // if she's waiting on the "be patient" page, surprise her right away
+        if(comeback && comeback.classList.contains("active")){
+          show(finale);
+          dots.forEach(d => d.classList.add("on"));
+          celebrate();
+        }
+      }, wait);
+    }
   }
 
   document.getElementById("startBtn").addEventListener("click", () => go(0));
