@@ -202,8 +202,8 @@ const CONTENT = {
     tape: "The End… or the beginning 💍",
     title: "Happy Birthday, My Love",
     photo: "",                  // no photo on the finale — video + message only
-    message: "Write your big heartfelt birthday message here. This is the last page she sees after finishing the scrapbook — make it count. Tell her what she means to you and what you're wishing for her this year. 💛",
-    signoff: "Forever yours,\nHarsho 💛",
+    message: "Wishing my baby, my girl, my life, my everything — the happiest birthday.\n\nWe have to celebrate your birthday, and this very day, on a grander scale every single year — because I don't know what I would do in this empty world without you.",
+    signoff: "I fucking love you ❤️\n— Harsho",
 
     // 🎬 BIRTHDAY VIDEO (appears on this finale, which only unlocks on her birthday):
     //   • Small file (< ~80 MB): put it in C:\Web and set   video: "birthday-video.mp4"

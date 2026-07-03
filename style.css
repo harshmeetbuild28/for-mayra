@@ -307,8 +307,8 @@ body::before{
 
 /* finale */
 .finale-title{font-family:'Anton',sans-serif;font-weight:400;text-transform:uppercase;font-size:3rem;line-height:1;color:var(--ink);margin:8px 0 14px}
-.finale-msg{font-family:'DM Sans',sans-serif;font-size:1.2rem;line-height:1.65;max-width:520px;margin:0 auto 22px;color:var(--ink)}
-.signoff{font-family:'Caveat',cursive;font-weight:700;font-size:1.9rem;white-space:pre-line;color:var(--rose);margin-bottom:10px}
+.finale-msg{font-family:'DM Sans',sans-serif;font-size:1.24rem;line-height:1.7;max-width:540px;margin:0 auto 22px;color:var(--ink);white-space:pre-line}
+.signoff{font-family:'Caveat',cursive;font-weight:700;font-size:2.2rem;line-height:1.25;white-space:pre-line;color:var(--rose);margin:6px 0 12px}
 
 /* birthday video on the finale — framed like a taped film */
 .finale-video{margin:8px auto 20px}
