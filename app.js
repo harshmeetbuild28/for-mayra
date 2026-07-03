@@ -41,13 +41,34 @@ document.addEventListener("DOMContentLoaded", () => {
   setPhoto(document.getElementById("finaleImg"), C.finale.photo);
 
   /* ---- optional birthday video on the finale ---- */
+  function pauseSong(){ const m = document.getElementById("bgMusic"); if(m && !m.paused) m.pause(); }
   (function(){
     const box = document.getElementById("finaleVideo");
     if(!box) return;
     if(C.finale.videoEmbed){
+      let src = C.finale.videoEmbed;
+      src += (src.indexOf("?") >= 0 ? "&" : "?") + "enablejsapi=1";   // let us listen to the player
       box.innerHTML =
-        `<div class="video-frame"><iframe src="${C.finale.videoEmbed}" title="birthday video" `
+        `<div class="video-frame"><iframe id="bdayYT" src="${src}" title="birthday video" `
         + `allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+      // load YouTube's player API and pause the song when the video starts playing
+      function hookYT(){
+        if(!(window.YT && window.YT.Player)) return;
+        new window.YT.Player("bdayYT", {
+          events: {
+            onStateChange: (e) => { if(e.data === window.YT.PlayerState.PLAYING) pauseSong(); }
+          }
+        });
+      }
+      if(window.YT && window.YT.Player){
+        hookYT();
+      } else {
+        const tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        document.head.appendChild(tag);
+        const prev = window.onYouTubeIframeAPIReady;
+        window.onYouTubeIframeAPIReady = function(){ if(prev) prev(); hookYT(); };
+      }
     } else if(C.finale.video){
       box.innerHTML =
         `<div class="video-frame"><video id="bdayVideo" controls playsinline preload="metadata">`
