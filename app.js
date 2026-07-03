@@ -40,6 +40,31 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("finaleSign").textContent  = C.finale.signoff;
   setPhoto(document.getElementById("finaleImg"), C.finale.photo);
 
+  /* ---- optional birthday video on the finale ---- */
+  (function(){
+    const box = document.getElementById("finaleVideo");
+    if(!box) return;
+    if(C.finale.videoEmbed){
+      box.innerHTML =
+        `<div class="video-frame"><iframe src="${C.finale.videoEmbed}" title="birthday video" `
+        + `allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe></div>`;
+    } else if(C.finale.video){
+      box.innerHTML =
+        `<div class="video-frame"><video id="bdayVideo" controls playsinline preload="metadata">`
+        + `<source src="${C.finale.video}"></video></div>`;
+      const vid = document.getElementById("bdayVideo");
+      // pause the background song while the video plays so they don't overlap
+      if(vid){
+        vid.addEventListener("play", () => {
+          const m = document.getElementById("bgMusic");
+          if(m && !m.paused) m.pause();
+        });
+      }
+    } else {
+      box.style.display = "none";   // no video set
+    }
+  })();
+
   /* ---- date unlocking: a page appears only on/after its date ---- */
   const TODAY = new Date(); TODAY.setHours(0,0,0,0);
   function unlocked(dateStr){

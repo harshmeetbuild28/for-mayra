@@ -198,12 +198,19 @@ const CONTENT = {
   // revealDate: the finale stays locked (she sees the 'comeback' card instead) until
   // this day arrives — her birthday. Set to her birthday.
   finale: {
-    revealDate: "2026-07-04",   // 🔒 unlocks on her birthday
+    revealDate: "2026-06-24",   // ⚠ TEMP for local preview only — I'll set back to 2026-07-04 before you push!
     tape: "The End… or the beginning 💍",
     title: "Happy Birthday, My Love",
-    photo: "images/finale.jpg",
+    photo: "",                  // no photo on the finale — video + message only
     message: "Write your big heartfelt birthday message here. This is the last page she sees after finishing the scrapbook — make it count. Tell her what she means to you and what you're wishing for her this year. 💛",
-    signoff: "Forever yours,\nHarsho 💛"
+    signoff: "Forever yours,\nHarsho 💛",
+
+    // 🎬 BIRTHDAY VIDEO (appears on this finale, which only unlocks on her birthday):
+    //   • Small file (< ~80 MB): put it in C:\Web and set   video: "birthday-video.mp4"
+    //   • Bigger video (recommended): upload to YouTube as UNLISTED, then use the EMBED url
+    //       e.g.  videoEmbed: "https://www.youtube.com/embed/XXXXXXXXXXX"
+    video: "",         // local file name, e.g. "birthday-video.mp4"
+    videoEmbed: "https://www.youtube.com/embed/6ItDGWPkaEc?rel=0"   // your YouTube video
   }
 
 };
