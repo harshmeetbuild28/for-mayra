@@ -198,7 +198,7 @@ const CONTENT = {
   // revealDate: the finale stays locked (she sees the 'comeback' card instead) until
   // this day arrives — her birthday. Set to her birthday.
   finale: {
-    revealDate: "2026-06-24",   // ⚠ TEMP for local preview only — I'll set back to 2026-07-04 before you push!
+    revealDate: "2026-07-04",   // 🔒 locked — unlocks at midnight Auckland time on her birthday
     tape: "The End… or the beginning 💍",
     title: "Happy Birthday, My Love",
     photo: "",                  // no photo on the finale — video + message only
